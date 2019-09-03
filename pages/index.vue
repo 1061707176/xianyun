@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-carousel height="1000px">
+  <div class="container">
+    <el-carousel >
       <el-carousel-item v-for="(item,index) in imgarr" :key="index">
         <div
           class="banner-image"
@@ -8,15 +8,27 @@
                 background:url(${'http://127.0.0.1:1337'+item.url}) center center no-repeat;
                 background-size:contain contain;
                 `"
-        >
-        </div>
+        ></div>
       </el-carousel-item>
     </el-carousel>
-    <div>
-      <el-input placeholder="请输入内容" v-model="input5" class="input-with-select" >
-        <el-button slot="append" icon="el-icon-search"></el-button>
-      </el-input>
+    <div class="banner-content">
+      <div class="search-bar"></div>
+      <el-row
+      type="flex" class="search-tab" >
+  <span v-for="(item, index) in options" :key="index" @click="tabcut(index)" :class="{active:index===current}"><i>{{item.title}}</i></span>
+      </el-row>
+
+      <el-row   type="flex" 
+                align="middle" 
+                class="search-input">
+
+        <input @keyup.enter="handleSearch" :placeholder="options[current].value">
+        <i class="el-icon-search" ></i>
+      </el-row>
+
+  
     </div>
+    
   </div>
 </template>
 
@@ -24,8 +36,31 @@
 export default {
   data() {
     return {
-      imgarr: []
+      imgarr: [],
+      options:[
+        {
+          title:'攻略',
+          value:'搜索城市'
+        },
+        {
+          title:'酒店',
+          value:'请输入城市搜索酒店'
+        },
+        {
+          title:'机票',
+          value:''
+        },
+      ],
+      current:0
     };
+  },
+  methods:{
+    tabcut(index){
+      this.current=index
+      if(index===2){
+         return this.$router.push('air');
+      }
+    }
   },
   mounted() {
     this.$axios({
@@ -50,7 +85,7 @@ export default {
   line-height: 150px;
   margin: 0;
 }
-.input-with-select{
+.input-with-select {
   width: 30%;
 }
 
@@ -61,15 +96,26 @@ export default {
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
-.banner-image {
-  height: 1000px;
-}
-.is-animating {
-  height: 1000px;
-}
+// .banner-image {
+//   height: 1000px;
+// }
+// .is-animating {
+//   height: 1000px;
+// }
 /* ------------ */
+   .container{
+    min-width:1000px;
+    margin:0 auto;
+    position:relative;
 
+    /deep/ .el-carousel__container{
+        height:700px;
+    }
 
+    .banner-image{
+        width:100%;
+        height:100%;
+    }
 
     .banner-content{
         z-index:9;
@@ -77,7 +123,7 @@ export default {
         position:absolute;
         left:50%;
         top:45%;
-        margin-left: -500px;
+        margin-left: -285px;
         border-top:1px transparent solid;
 
         .search-bar{

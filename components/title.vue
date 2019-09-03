@@ -31,6 +31,7 @@ export default {
 .banxin{
     width: 1000px;
     margin: 0 auto;
+    height: 60px;
 
     .navs{
         flex: 1;
