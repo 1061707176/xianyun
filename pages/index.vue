@@ -67,7 +67,7 @@ export default {
       url: "scenics/banners"
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.imgarr = res.data.data;
       })
       .catch(res => {
