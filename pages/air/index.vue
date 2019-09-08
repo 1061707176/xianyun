@@ -59,12 +59,21 @@
 import AirForm from '@/components/air/searchForm'
 export default {
 data(){
-    return{}
+    return{
+      sales:[]
+    }
 }
 ,components:{
     AirForm
 },
-
+mounted(){
+  this.$axios({
+    url:'/airs/sale',
+  }).then(res=>{
+    console.log(res)
+    this.sales=res.data.data
+  })
+}
 }
 </script>
 
