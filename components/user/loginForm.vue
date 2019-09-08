@@ -66,6 +66,7 @@ export default {
                     }, 1000);
             })
             .catch(err => {
+              console.dir(err)
               this.$message.error("请输入正确的用户名和密码");
             });
         }

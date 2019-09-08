@@ -92,13 +92,25 @@ export default {
             data:popp
         }).then(res=>{
             console.log(res)
+            this.$message.success('注册成功')
+              let {username,password}=this.form
+            this.$store
+            .dispatch("user/login", {username,password})
+             setTimeout(() => {
+                        this.$router.replace("/")
+                    }, 1000);
+
+        })
+        .catch(err=>{
+          console.dir(err)
         })
             }
         })
        }else{
            this.$message.error('手机号码格式错误')
        }
-    }
+    },
+    
 
   }
 };

@@ -11,16 +11,22 @@
         <nuxt-link to="/air">国内机票</nuxt-link>
       </el-row>
       <el-row>
-        <nuxt-link to="/user/login" v-if="!$store.state.user.userInfo.token">登录/注册</nuxt-link>
+        <nuxt-link to="/user/login" v-if="!$store.state.user.userInfo.token" class="login-text" ma>登录/注册</nuxt-link>
          
         <el-dropdown v-if="$store.state.user.userInfo.token">
     <el-row type="flex" align="middle" class="el-dropdown-link">
         <nuxt-link to="#">
             <img :src="$axios.defaults.baseURL + $store.state.user.userInfo.user.defaultAvatar" id="img" />
             {{$store.state.user.userInfo.user.nickname}} 
+         
         </nuxt-link>
         <i class="el-icon-caret-bottom el-icon--right"></i>
+        
     </el-row>
+     <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>个人中心</el-dropdown-item>
+    <el-dropdown-item @click.native="exitt()">退出</el-dropdown-item>
+  </el-dropdown-menu>
     <!-- 其他代码... -->
 </el-dropdown>
       </el-row>
@@ -30,14 +36,30 @@
 
 <script>
 export default {
+  data(){
+    return{}
+  },
     mounted(){
-        console.log(this.$store.state.user.userInfo)
+        // console.log(this.$store.state.user.userInfo)
+    },
+    methods: {
+      exitt(){
+        let {commit} =this.$store
+        commit('user/cleanUserInfo')
+        // console.dir(commit)
+      }
     }
 };
 </script>
 
 <style lang="less" scoped>
+.login-text{
+  display: block;
+padding-top: 20px
+
+}
 .el-dropdown-link{
+  margin-top: 15px;
     a{
         padding: none !important;
     }
@@ -45,7 +67,7 @@ export default {
         width: 32px ;
         height: 32px;
         border-radius: 50%;
-        display: inline;
+        display: inline-block;
         vertical-align: middle ;
     }
         
@@ -74,12 +96,12 @@ export default {
         border-bottom: #409eff solid 5px;
       }
     }
-  }
   a {
     display: block;
     padding: 0px 20px;
     height: 60px;
     line-height: 60px;
+  }
   }
   .logo {
     height: 60px;

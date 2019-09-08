@@ -7,6 +7,10 @@ export const state=()=>({
 export const mutations= {
     setUserInfo(state,data){
         state.userInfo=data
+    },
+    cleanUserInfo(state,info){
+       localStorage.removeItem('userInfo')
+       state.userInfo={}
     }
 }
 export const actions={
