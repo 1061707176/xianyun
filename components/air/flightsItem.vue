@@ -44,7 +44,7 @@
                             size="mini">
                             选定
                             </el-button>
-                            <p>剩余：83</p>
+                            <p>剩余：{{item.discount}}</p>
                         </el-col>
                     </el-row>
                 </el-col>
