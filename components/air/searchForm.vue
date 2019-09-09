@@ -135,23 +135,23 @@ export default {
         }).then(res => {
             // console.log(res)
             let arr=res.data.data
-            console.log(arr)
+            // console.log(arr)
             let cbarr=[]
           arr.forEach(e=>{
               e.value=e.name.replace('市','')
               cbarr.push(e)
               });
-              console.log(cbarr)
+              // console.log(cbarr)
                   cb(cbarr)
           })
           }
     },
     handleSelect(item){
-        console.log(item)
+        // console.log(item)
         this.form.departCode=item.sort
     },
     handleDate(item){
-// console.log(item)
+console.log(item,'-----')
  this.form.departDate = moment(item).format(`YYYY-MM-DD`);
  console.log(this.form.departDate)
     },
@@ -173,7 +173,7 @@ export default {
             this.$alert('出发时间不能为空','提示',{type:'error'})
             return
         }
-        this.$router.path({
+        this.$router.push({
             path:'/air/flights',
             query:this.form
         })
